@@ -83,6 +83,17 @@ function playGame() {
 function playGameUI() {
     let computerScore = 0;
     let playerScore = 0;
+    const scoreBox = document.getElementById("scoreBox");
+    let compScoreUI = document.createElement("div")
+    let playerScoreUI = document.createElement("div")
+    compScoreUI.textContent = String(computerScore)
+    playerScoreUI.textContent = String(playerScore)
+    const compScoreDiv = document.getElementById("compScore")
+    const playScoreDiv = document.getElementById("playerScore")
+    compScoreDiv.appendChild(compScoreUI)
+    playScoreDiv.appendChild(playerScoreUI)
+    scoreBox.appendChild(compScoreDiv)
+    scoreBox.appendChild(playScoreDiv)
 }
 // playGame()
 configUI()
