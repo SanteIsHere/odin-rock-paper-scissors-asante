@@ -33,6 +33,21 @@ function playRound(playerSel=playerSelection(), compSel=computerPlay()) {
     }
 }
 
+function configUI() {
+    const body = document.body;
+    body.setAttribute("style", "display: flex; flex-direction: column; align-items: center;")
+    const headingCont = document.getElementById("headCont");
+    headingCont.setAttribute("style", "display: flex; justify-content: center;")
+    const mainHeading = document.getElementById("head");
+    mainHeading.setAttribute("style", "font: 'Roboto'; font-weight: 100");
+    const playGameButt = document.createElement("button");
+    playGameButt.id = "startGameButt"
+    playGameButt.textContent = "Start Game"
+    playGameButt.setAttribute("style", "width: fit-content; justify-self: center;")
+    playGameButt.setAttribute("onClick", "playGameUI()")
+    body.appendChild(playGameButt);
+}
+
 // Function to play the game
 function playGame() {
     let computerScore = 0;
@@ -64,4 +79,10 @@ function playGame() {
         console.log("Player wins!")
     }
 }
-playGame()
+
+function playGameUI() {
+    let computerScore = 0;
+    let playerScore = 0;
+}
+// playGame()
+configUI()
