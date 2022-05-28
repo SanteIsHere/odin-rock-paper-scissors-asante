@@ -17,19 +17,21 @@
             <div id="playerText">Player Score</div>
             <div id="playerScoreDisplay" name="score"></div>
         </div>
-        <div id="iconCont">
-            <button id="icons">
-                <img src="assets/rock.png" onclick="alert('Hi!')">
-            </button>
-            <button id="icons">
-                <img src="assets/paper.png">
-            </button>
-            <button id="icons">
-                <img src="assets/scissors.png">
-            </button>
-        </div>
+    </div>
+    <div id="playerChoices">
+        <button id="playerInput">
+            <img id="buttImage" src="assets/rock.png" onclick="alert('Hi!')">
+        </button>
+        <button id="playerInput">
+            <img id="buttImage" src="assets/paper.png">
+        </button>
+        <button id="playerInput">
+            <img id="buttImage" src="assets/scissors.png">
+        </button>
     </div>
     <button id="playButton" onclick="playGameUI()">Start Game</button>
+    <label for="roundsInput">Rounds to play:</label>
+    <input type="number" name="roundsInput" min="0" max="5">
 </body>
 <script src="script.js"></script>
 </html>

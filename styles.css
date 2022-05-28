@@ -4,6 +4,13 @@ body {
     align-items: center;
 }
 
+/* 
+Borders for all elements to 
+visualize spacing and positioning
+* {
+    border: 1px solid;
+} */
+
 #head {
     display: flex;
     justify-content: center;
@@ -26,17 +33,22 @@ body {
     flex-direction: column;
 }
 
-#iconCont {
-    display: flex;
+#playerChoices {
+    /* Default hidden, unhidden once the start game
+    button is pressed (in script.js) */
+    display: none;
     justify-content: space-between;
     gap: 20px;
 }
 
-#icons {
-    width: fit-content;
+#playerInput {
+    border: none;
+    background-color: transparent;
+    width: 100px;
+    height: 100px;
 }
 
-/* 
-#playButton {
-    aria-
-} */
+#buttImage {
+    width: 100px;
+    height: 100px;
+}
