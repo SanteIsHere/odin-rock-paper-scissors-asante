@@ -33,21 +33,6 @@ function playRound(playerSel=playerSelection(), compSel=computerPlay()) {
     }
 }
 
-function configUI() {
-    const body = document.body;
-    body.setAttribute("style", "display: flex; flex-direction: column; align-items: center;")
-    const headingCont = document.getElementById("headCont");
-    headingCont.setAttribute("style", "display: flex; justify-content: center;")
-    const mainHeading = document.getElementById("head");
-    mainHeading.setAttribute("style", "font: 'Roboto'; font-weight: 100");
-    const playGameButt = document.createElement("button");
-    playGameButt.id = "startGameButt"
-    playGameButt.textContent = "Start Game"
-    playGameButt.setAttribute("style", "width: fit-content; justify-self: center;")
-    playGameButt.setAttribute("onClick", "playGameUI()")
-    body.appendChild(playGameButt);
-}
-
 // Function to play the game
 function playGame() {
     let computerScore = 0;
@@ -81,19 +66,15 @@ function playGame() {
 }
 
 function playGameUI() {
-    let computerScore = 0;
+    let compScore = 0;
     let playerScore = 0;
-    const scoreBox = document.getElementById("scoreBox");
-    let compScoreUI = document.createElement("div")
-    let playerScoreUI = document.createElement("div")
-    compScoreUI.textContent = String(computerScore)
+    const scoreBox = document.getElementById("scoreBox")
+    const compScoreUI = document.getElementById("compScoreDisplay")
+    const playerScoreUI = document.getElementById("playerScoreDisplay")
+    const playButton = document.getElementById("playButton")
+    console.log(playButton)
+    scoreBox.style.display = "flex"
+    playButton.style.display = "none"
+    compScoreUI.textContent = String(compScore)
     playerScoreUI.textContent = String(playerScore)
-    const compScoreDiv = document.getElementById("compScore")
-    const playScoreDiv = document.getElementById("playerScore")
-    compScoreDiv.appendChild(compScoreUI)
-    playScoreDiv.appendChild(playerScoreUI)
-    scoreBox.appendChild(compScoreDiv)
-    scoreBox.appendChild(playScoreDiv)
 }
-// playGame()
-configUI()

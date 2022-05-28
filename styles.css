@@ -1,0 +1,40 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#head {
+    display: flex;
+    justify-content: center;
+    font-weight: 100;
+}
+
+#playButton {
+    width: fit-content;
+}
+
+#scoreBox {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#playerScore #computerScore {
+    display: flex;
+    flex-direction: column;
+}
+
+#icons {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100px;
+    height: 100px;
+}
+
+/* 
+#playButton {
+    aria-
+} */

@@ -2,15 +2,30 @@
 <html>
 <head>
     <title>Rock, Paper, Scissors!</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="headCont">
         <h1 id="head">Rock Paper Scissors!</h1>
     </div>
-    <div id="scoreBox">
-        <div id="compScore"></div>
-        <div id="playerScore"></div>
+    <div id="scoreBox" style="display: none;">
+        <div id="compScore">
+            <div id="text">Computer Score</div>
+            <div id="compScoreDisplay" name="score"></div>
+        </div>
+        <div id="playerScore">
+            <div id="playerText">Player Score</div>
+            <div id="playerScoreDisplay" name="score"></div>
+        </div>
+        <div id="icons">
+            <a>
+                <img src="rock.png" onclick="alert('Hi!')">
+            </a>
+            <img src="paper.png">
+            <img src="scissors.png">
+        </div>
     </div>
+    <button id="playButton" onclick="playGameUI()">Start Game</button>
 </body>
 <script src="script.js"></script>
 </html>
