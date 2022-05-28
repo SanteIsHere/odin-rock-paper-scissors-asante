@@ -26,12 +26,14 @@ body {
     flex-direction: column;
 }
 
-#icons {
+#iconCont {
     display: flex;
     justify-content: space-between;
     gap: 20px;
-    width: 100px;
-    height: 100px;
+}
+
+#icons {
+    width: fit-content;
 }
 
 /* 
