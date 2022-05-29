@@ -52,3 +52,8 @@ visualize spacing and positioning
     width: 100px;
     height: 100px;
 }
+
+#roundsInputCont {
+    display: none;
+    gap: 20px;
+}

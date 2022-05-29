@@ -105,11 +105,15 @@ function playGameUI() {
     const playerScoreUI = document.getElementById("playerScoreDisplay")
     const playButton = document.getElementById("playButton")
     const playerChoice = document.getElementById("playerChoices")
+    const roundsInputCont = document.getElementById("roundsInputCont")
     console.log(playButton)
     /* Hide the play button,
     reveal the scorebox and player choices */
+    roundsInputCont.style.display = "flex"
     playerChoice.style.display = "flex"
     scoreBox.style.display = "flex"
     playButton.style.display = "none"
+
+
     game(rounds)
 }
