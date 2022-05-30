@@ -26,6 +26,7 @@ visualize spacing and positioning
     gap: 20px;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 50px;
 }
 
 #playerScore #computerScore {
@@ -53,7 +54,13 @@ visualize spacing and positioning
     height: 100px;
 }
 
+#buttImage.hover {
+    color: black;
+    width: 200px;
+}
+
 #roundsInputCont {
     display: none;
     gap: 20px;
+    padding: 20px;
 }

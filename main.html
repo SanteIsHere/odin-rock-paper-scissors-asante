@@ -32,7 +32,12 @@
     <button id="playButton" onclick="playGameUI()">Start Game</button>
     <div id="roundsInputCont"> 
         <label for="roundsInput">Rounds to play:</label>
-        <input type="number" name="roundsInput" min="0" max="5">
+        <input type="number" name="roundsInput" id="roundsInput" min="0" max="5">
+        <!-- <label for="submitRounds">Submit</label> -->
+        <input type="submit" name="submitRounds" onclick="getRounds()"/>
+    </div>
+    <div>
+        <h1 id="output"></h1>
     </div>
 </body>
 <script src="script.js"></script>
