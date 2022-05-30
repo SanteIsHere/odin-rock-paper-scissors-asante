@@ -66,12 +66,12 @@ function playGame() {
 }
 
 // ===== UI Section ===== //
-function playRoundUI(playerSel=playerSelection(), compSel=computerPlay()) {
+function playRoundUI(playerSel=playerSelectionUI(), compSel=computerPlay(), output) {
     let compWin = "Computer wins the round!";
     let playerWin = "Player wins the round!";
     let tie = "It's a tie!";
 
-    console.log(`Player chooses: ${playerSel}\nComputer chooses: ${compSel}`);
+    output.textContent = `Player chooses: ${playerSel}\nComputer chooses: ${compSel}`
 
     if (compSel === playerSel) {
         output.textContent = tie
@@ -88,7 +88,7 @@ function playRoundUI(playerSel=playerSelection(), compSel=computerPlay()) {
 
 function game(rounds, output) {
     for (let i = 0; i < rounds; i++) {
-        let result = playRoundUI();
+        let result = playRoundUI(output);
         switch (result) {
             case 0:
                 output.textContent = `Tie...No points for computer or player...\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`;
@@ -119,6 +119,10 @@ function getRounds() {
     roundsInputCont.style.display = "none"
 }
 
+function getPlayerSel(node) {
+    return node.className
+}
+
 function playGameUI() {
     // Play Rock, Paper, Scissors with 
     //  interactive UI elements
@@ -126,19 +130,20 @@ function playGameUI() {
     let playerScore = 0;
     let output = document.getElementById("output")
     let roundsInput = document.getElementById("roundsInput")
+    let buttons = document.getElementsByClassName("buttons")
     const scoreBox = document.getElementById("scoreBox")
     const compScoreUI = document.getElementById("compScoreDisplay")
     const playerScoreUI = document.getElementById("playerScoreDisplay")
     const playButton = document.getElementById("playButton")
     const playerChoice = document.getElementById("playerChoices")
     const roundsInputCont = document.getElementById("roundsInputCont")
-    console.log(playButton)
     /* Hide the play button,
     reveal the scorebox and player choices */
     roundsInputCont.style.display = "flex"
     playerChoice.style.display = "flex"
     scoreBox.style.display = "flex"
     playButton.style.display = "none"
+    buttons.forEach(function (node) {node.addEventListener("click", getPlayerSel)})
     let rounds = getRounds()
     game(rounds, output)
 }
