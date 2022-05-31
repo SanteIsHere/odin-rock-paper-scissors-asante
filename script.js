@@ -66,18 +66,20 @@ function playGame() {
 }
 
 // ===== UI Section ===== //
-function playRoundUI(playerSel=playerSelectionUI(), compSel=computerPlay(), output) {
+
+function playRoundUI(playerSel=getPlayerSel(node), compSel=computerPlay(), output) {
     let compWin = "Computer wins the round!";
     let playerWin = "Player wins the round!";
     let tie = "It's a tie!";
-
+    let playerInputs = document.getElementsByName("choices")
+    
     output.textContent = `Player chooses: ${playerSel}\nComputer chooses: ${compSel}`
 
     if (compSel === playerSel) {
         output.textContent = tie
         return 0;
-    } else if ((compSel == "Rock" && playerSel == "Scissors") 
-    || (compSel == "Scissors" && playerSel == "Paper")) {
+    } else if ((compSel.match(/Rock|rock/g) && playerSel.match(/Scissors|scissors/g)) 
+    || (compSel.match(/Scissors|scissors/g) && playerSel.match(/Paper|paper/g))) {
         output.textContent = `${compWin}`;
         return 1;
     } else {
@@ -91,23 +93,23 @@ function game(rounds, output) {
         let result = playRoundUI(output);
         switch (result) {
             case 0:
-                output.textContent = `Tie...No points for computer or player...\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`;
+                output.textContent = `Tie...No points for computer or player...\nComputer Score: ${compScore}\nPlayer Score: ${playerScore}`;
                 output.textContent = "---- END ROUND ----";
             case 1:
                 // Computer wins round
-                computerScore += 1;
-                output.textContent = `Computer wins the round!\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`;
+                compScore += 1;
+                output.textContent = `Computer wins the round!\nComputer Score: ${compScore}\nPlayer Score: ${playerScore}`;
                 output.textContent = "---- END ROUND ----";
             case 2:
                 // Player wins round
                 playerScore += 1;
-                output.textContent = `Player wins the round!\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`;
+                output.textContent = `Player wins the round!\nComputer Score: ${compScore}\nPlayer Score: ${playerScore}`;
                 output.textContent = "---- END ROUND ----";
         }
     }
-    if (computerScore === playerScore) {
+    if (compScore === playerScore) {
         output.textContent = "Tie game!"
-    } else if (computerScore > playerScore) {
+    } else if (compScore > playerScore) {
         output.textContent = "Computer wins!"
     } else {
         output.textContent = "Player wins!"
@@ -115,12 +117,19 @@ function game(rounds, output) {
 }
 
 function getRounds() {
-    output.textContent = roundsInput.value;
+    output.textContent = `Playing ${roundsInput.value} rounds...`;
     roundsInputCont.style.display = "none"
+    setTimeout(() => output.textContent = "", 4000);
+    return roundsInput.value;
 }
 
 function getPlayerSel(node) {
+    console.log(node)
     return node.className
+}
+
+function onSelButton(node) {
+    node.addEventListener("click", getPlayerSel)
 }
 
 function playGameUI() {
@@ -130,7 +139,7 @@ function playGameUI() {
     let playerScore = 0;
     let output = document.getElementById("output")
     let roundsInput = document.getElementById("roundsInput")
-    let buttons = document.getElementsByClassName("buttons")
+    let buttons = document.getElementsByName("choices")
     const scoreBox = document.getElementById("scoreBox")
     const compScoreUI = document.getElementById("compScoreDisplay")
     const playerScoreUI = document.getElementById("playerScoreDisplay")
@@ -143,7 +152,8 @@ function playGameUI() {
     playerChoice.style.display = "flex"
     scoreBox.style.display = "flex"
     playButton.style.display = "none"
-    buttons.forEach(function (node) {node.addEventListener("click", getPlayerSel)})
-    let rounds = getRounds()
+    buttons.forEach(onSelButton)
+    console.log(buttons[0].className)
+    let rounds = Number(getRounds())
     game(rounds, output)
 }

@@ -43,8 +43,6 @@ visualize spacing and positioning
 }
 
 #playerInput {
-    border: none;
-    background-color: transparent;
     width: 100px;
     height: 100px;
 }
