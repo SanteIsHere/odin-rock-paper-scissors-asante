@@ -1,0 +1,54 @@
+/* * {
+    border: 1px solid black;
+} */
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(56, 38, 38);
+}
+
+h1, h2, h3, div {
+    font-family: monospace;
+    color: aliceblue;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    background-color: gray;
+    padding: 20px
+}
+
+/*
+#playerPortrait {
+     padding: 0px; 
+}
+*/
+
+.choices {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.choices * {
+    border: none;
+}
+
+.choices img:hover {
+    border: 2px solid orange;
+}
+
+#compPortrait {
+    border-radius: 10px;
+}
+
+img {
+    width: 60px;
+    border-radius: 30px;
+}
