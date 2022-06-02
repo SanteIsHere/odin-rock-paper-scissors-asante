@@ -30,7 +30,7 @@ h1, h2, h3, div {
     align-items: center;
     gap: 150px;
     background-color: gray;
-    padding: 100px
+    padding: 10px
 }
 
 /*
@@ -42,7 +42,7 @@ h1, h2, h3, div {
 .choices {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 .choices img:hover {
