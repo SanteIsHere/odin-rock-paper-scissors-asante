@@ -10,18 +10,27 @@ body {
     background-color: rgb(56, 38, 38);
 }
 
+h1 {
+    font-weight: 200;
+}
+
 h1, h2, h3, div {
     font-family: monospace;
     color: aliceblue;
+}
+
+#middle-cont {
+    display: flex;
+    flex-direction: column;
 }
 
 #game {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 50px;
+    gap: 150px;
     background-color: gray;
-    padding: 20px
+    padding: 100px
 }
 
 /*
@@ -34,10 +43,6 @@ h1, h2, h3, div {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
-}
-
-.choices * {
-    border: none;
 }
 
 .choices img:hover {
