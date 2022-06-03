@@ -78,5 +78,7 @@ results.textContent = ""
 // Buttons
 let choices = document.getElementsByName("choice")
 choices.forEach(function (choice) {choice.addEventListener("click", function (e) {onChoice(e.target)})})
+
+// Rounds (TODO: Add player input for rounds)
 let rounds = 0
 let roundsLeft = 5
