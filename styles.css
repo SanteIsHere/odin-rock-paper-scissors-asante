@@ -14,7 +14,7 @@ h1 {
     font-weight: 200;
 }
 
-h1, h2, h3, div {
+h1, h2, h3, div, label {
     font-family: monospace;
     color: aliceblue;
 }

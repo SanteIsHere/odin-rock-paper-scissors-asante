@@ -19,7 +19,7 @@ function playRoundUI(playerSel, compSel=computerPlay()) {
     }}, 3000)
 }
 
-function game(result, done=false) {
+function game(result) {
     if (result === 0) {
         results.textContent = "Tie...";
         setTimeout(() => results.textContent = "Pick your weapon!", 3000)
@@ -36,18 +36,26 @@ function game(result, done=false) {
         results.textContent = "You win the round!";
         setTimeout(() => results.textContent = "Pick your weapon!", 3000)
     }
-    rounds += 1
-    roundsLeft -= 1
-    roundsDisplay.textContent = rounds
+    roundsPlayed += 1
+    roundsDisplay.textContent = roundsPlayed
     playerPick.textContent = ""
     compPick.textContent = ""
+    if (roundsPlayed === rounds) {
+        setTimeout(endScreen(), 2500)
+    }
 }
 
 function onChoice(node) {
     // Play a round with the class name 
     //  of the button/image ("Rock", "Paper", or "Scissors")
-    if (roundsLeft >= 1) {
-    playRoundUI(node.className)
+    // console.log(roundsSet)
+    if ((roundsPlayed < rounds)) {
+        if (roundsSet) {
+            playRoundUI(node.className)
+        } else {
+            results.textContent = "Please enter rounds!"
+            setTimeout(() => results.textContent = "", 2000)
+        }
     } else {
         endScreen()
     }
@@ -55,10 +63,26 @@ function onChoice(node) {
 
 function endScreen() {
     document.getElementById("game").style.display = "none"
-    let sortedScores = [...scores.entries()].sort()
-    results.textContent = `Game Over! ${sortedScores[0][0]} won!`
-    // Refresh the page, unhide game
-    setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
+    let sortedScores = [...scores.entries()].sort(function(arr1, arr2) {return arr2[1]-arr1[1]})
+    // console.log(sortedScores[0], scores.values())
+    if (scores["Computer"] != scores["Player"]) {
+        results.textContent = `Game Over! ${sortedScores[0][0]} won with ${sortedScores[0][1]} points!\n
+            ${sortedScores[1][0]} had ${sortedScores[1][1]} points...`
+        // Refresh the page, unhide game
+        setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
+    } else {
+        results.textContent = `Game Over! ${sortedScores[0][0]} won with ${sortedScores[0][1]} points!\n
+            ${sortedScores[1][0]} had ${sortedScores[1][1]} points...`
+            setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
+    }
+}
+
+function setRounds() {
+    roundsSet = true
+    rounds = Number(document.getElementById('roundInput').value)
+    results.textContent = `Playing ${rounds} rounds`
+    setTimeout(function() {roundInput.style.display = "none";
+                            setTimeout(() => results.textContent = "", 2500)}, 2500)
 }
 
 // Scores
@@ -72,6 +96,7 @@ let compScoreDisplay = document.getElementById("compScore")
 let playerPick = document.getElementById("playerPick")
 let compPick = document.getElementById("compPick")
 let results = document.getElementById("results")
+let roundInput = document.getElementById("roundSel")
 let roundsDisplay = document.getElementById("rounds")
 results.textContent = ""
 
@@ -80,5 +105,6 @@ let choices = document.getElementsByName("choice")
 choices.forEach(function (choice) {choice.addEventListener("click", function (e) {onChoice(e.target)})})
 
 // Rounds (TODO: Add player input for rounds)
-let rounds = 0
-let roundsLeft = 5
+let rounds
+let roundsPlayed = 0
+let roundsSet = false
