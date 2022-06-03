@@ -3,72 +3,9 @@ function computerPlay() {
     return ["Rock", "Paper", "Scissors"][Math.round(Math.random() * 2)]
 }
 
-// // Helper function to format playerSelection
-// function capitalize(str) {
-//     return `${str[0].toUpperCase()}${str.slice(1, str.length).toLowerCase()}`
-// }
-
-// function playerSelection() {
-//     return capitalize(prompt("Enter your choice (Rock/Paper/Scissors): "))
-// }
-
-// // Function to play a round of RPS
-// function playRound(playerSel=playerSelection(), compSel=computerPlay()) {
-//     let compWin = "Computer wins the round!";
-//     let playerWin = "Player wins the round!";
-//     let tie = "It's a tie!";
-
-//     console.log(`Player chooses: ${playerSel}\nComputer chooses: ${compSel}`);
-
-//     if (compSel === playerSel) {
-//         console.log(tie);
-//         return 0;
-//     } else if ((compSel == "Rock" && playerSel == "Scissors") 
-//     || (compSel == "Scissors" && playerSel == "Paper")) {
-//         console.log(`${compWin}\n`);
-//         return 1;
-//     } else {
-//         console.log(`${playerWin}\n`);
-//         return 2;
-//     }
-// }
-
-// // Function to play the game
-// function playGame() {
-//     let computerScore = 0;
-//     let playerScore = 0;
-//     // Play 5 rounds
-//     for (let i = 0; i < 5; i++) {
-//         let result = playRound();
-//         switch (result) {
-//             case 0:
-//                 console.log(`Tie...No points for computer or player...\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`);
-//                 console.log("---- END ROUND ----");
-//             case 1:
-//                 // Computer wins round
-//                 computerScore += 1;
-//                 console.log(`Computer wins the round!\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`);
-//                 console.log("---- END ROUND ----");
-//             case 2:
-//                 // Player wins round
-//                 playerScore += 1;
-//                 console.log(`Player wins the round!\nComputer Score: ${computerScore}\nPlayer Score: ${playerScore}`);
-//                 console.log("---- END ROUND ----");
-//         }
-//     }
-//     if (computerScore === playerScore) {
-//         console.log("Tie game!")
-//     } else if (computerScore > playerScore) {
-//         console.log("Computer wins!")
-//     } else {
-//         console.log("Player wins!")
-//     }
-// }
-
-// ==== Begin UI ==== //
 function playRoundUI(playerSel, compSel=computerPlay()) {
-    info.textContent = `Player chooses: ${playerSel}\nComputer chooses: ${compSel}`;
-
+    playerPick.textContent = `Player chooses: ${playerSel}`
+    compPick.textContent = `Computer chooses: ${compSel}`
     setTimeout(function() {if (compSel === playerSel) {
         console.log("Tie")
         game(0);
@@ -82,31 +19,33 @@ function playRoundUI(playerSel, compSel=computerPlay()) {
     }}, 3000)
 }
 
-function game(result) {
+function game(result, done=false) {
     if (result === 0) {
-        info.textContent = "Tie...";
-        setTimeout(() => info.textContent = "Pick your weapon!", 3000)
+        results.textContent = "Tie...";
+        setTimeout(() => results.textContent = "Pick your weapon!", 3000)
     } else if (result === 1) {
         // Computer wins round
-        computerScore += 1;
-        compScoreDisplay.textContent = computerScore
-        info.textContent = "Computer wins the round...";
-        setTimeout(() => info.textContent = "Pick your weapon!", 3000)
+        scores.set("Computer", scores.get("Computer") + 1);
+        compScoreDisplay.textContent = scores.get("Computer")
+        results.textContent = "Computer wins the round...";
+        setTimeout(() => results.textContent = "Pick your weapon!", 3000)
     } else if (result === 2) {
         // Player wins round
-        playerScore += 1;
-        playerScoreDisplay.textContent = playerScore
-        info.textContent = "You win the round!";
-        setTimeout(() => info.textContent = "Pick your weapon!", 3000)
+        scores.set("Player", scores.get("Player") + 1);
+        playerScoreDisplay.textContent = scores.get("Player")
+        results.textContent = "You win the round!";
+        setTimeout(() => results.textContent = "Pick your weapon!", 3000)
     }
     rounds += 1
     roundsLeft -= 1
-    console.log("Rounds Left: " + roundsLeft)
     roundsDisplay.textContent = rounds
+    playerPick.textContent = ""
+    compPick.textContent = ""
 }
 
 function onChoice(node) {
-    // console.log(node.className)
+    // Play a round with the class name 
+    //  of the button/image ("Rock", "Paper", or "Scissors")
     if (roundsLeft >= 1) {
     playRoundUI(node.className)
     } else {
@@ -115,20 +54,26 @@ function onChoice(node) {
 }
 
 function endScreen() {
-    document.getElementById("game").remove()
-    info.textContent = `Game Over! ${Math.max(computerScore, playerScore)} won!`
+    document.getElementById("game").style.display = "none"
+    let sortedScores = [...scores.entries()].sort()
+    results.textContent = `Game Over! ${sortedScores[0][0]} won!`
+    // Refresh the page, unhide game
+    setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
 }
 
 // Scores
-let computerScore = 0;
-let playerScore = 0;
+let scores = new Map()
+scores.set("Computer", 0)
+scores.set("Player", 0)
 let playerScoreDisplay = document.getElementById("playerScore")
 let compScoreDisplay = document.getElementById("compScore")
 
 // UI elements
-let info = document.getElementById("info")
+let playerPick = document.getElementById("playerPick")
+let compPick = document.getElementById("compPick")
+let results = document.getElementById("results")
 let roundsDisplay = document.getElementById("rounds")
-info.textContent = ""
+results.textContent = ""
 
 // Buttons
 let choices = document.getElementsByName("choice")
