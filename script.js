@@ -49,30 +49,33 @@ function onChoice(node) {
     // Play a round with the class name 
     //  of the button/image ("Rock", "Paper", or "Scissors")
     // console.log(roundsSet)
-    if ((roundsPlayed < rounds)) {
-        if (roundsSet) {
+    if (roundsSet) {
+        if ((roundsPlayed < rounds)) {
             playRoundUI(node.className)
         } else {
-            results.textContent = "Please enter rounds!"
-            setTimeout(() => results.textContent = "", 2000)
+            endScreen()
         }
     } else {
-        endScreen()
-    }
+        results.textContent = "Please enter rounds!"
+        setTimeout(() => results.textContent = "", 2000)
+    }  
 }
 
 function endScreen() {
     document.getElementById("game").style.display = "none"
+    results.textContent = ""
     let sortedScores = [...scores.entries()].sort(function(arr1, arr2) {return arr2[1]-arr1[1]})
-    // console.log(sortedScores[0], scores.values())
-    if (scores["Computer"] != scores["Player"]) {
+    console.log(scores)
+    sortedScores.forEach((score) => console.log(score))
+    if (scores.get("Computer") != scores.get("Player")) {
+        console.log("Someone won")
         results.textContent = `Game Over! ${sortedScores[0][0]} won with ${sortedScores[0][1]} points!\n
             ${sortedScores[1][0]} had ${sortedScores[1][1]} points...`
         // Refresh the page, unhide game
         setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
     } else {
-        results.textContent = `Game Over! ${sortedScores[0][0]} won with ${sortedScores[0][1]} points!\n
-            ${sortedScores[1][0]} had ${sortedScores[1][1]} points...`
+        console.log("Tie game!")
+        results.textContent = `Tie game!`
             setTimeout(function() {history.go(0); document.getElementById("game").style.display = "flex"}, 5000)
     }
 }
